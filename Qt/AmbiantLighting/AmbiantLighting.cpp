@@ -78,16 +78,11 @@ void AMBIANT_LIGHTING::OpenSerialPort()
 //-----------------------------------------------------------
 void AMBIANT_LIGHTING::Loop()
 {
-    QTime time;
-    time.start();
-
     int nR = 0.f;
     int nG = 0.f;
     int nB = 0.f;
 
     const QPixmap& Pixmap = QGuiApplication::primaryScreen()->grabWindow(QApplication::desktop()->winId());
-
-    qDebug() << "1 : " << time.elapsed();
 
     const QImage& Image = Pixmap.toImage();
     const QSize& ImageSize = Image.size();
@@ -95,7 +90,7 @@ void AMBIANT_LIGHTING::Loop()
     const int nWidth = ImageSize.width();
     const int nHeight = ImageSize.height();
 
-    int nDelta = 2;
+    int nDelta = 4;
 
     for(int nCptWidth = 0;nCptWidth < ImageSize.width();nCptWidth+=nDelta)
     {
@@ -116,12 +111,18 @@ void AMBIANT_LIGHTING::Loop()
     QBrush Brush(AverageColor);
     _pGraphicsScene->setBackgroundBrush(Brush);
 
-    QByteArray dataOut;
-    dataOut.append('C');
-    dataOut.append(nR);
-    dataOut.append(nG);
-    dataOut.append(nR);
-    _pSerial->write(dataOut);
+    if(_pSerial->isOpen())
+    {
+        byte bR = nR;
+        byte bG = nG;
+        byte bB = nB;
+        QByteArray dataOut;
+        dataOut.append('C');
+        dataOut.append(bR);
+        dataOut.append(bG);
+        dataOut.append(bB);
+        _pSerial->write(dataOut);
+    }
 
     QTimer::singleShot(0, this, SLOT(Loop()));
 }
