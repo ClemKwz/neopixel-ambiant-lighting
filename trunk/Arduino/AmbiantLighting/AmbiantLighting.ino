@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
 // Connected pin
-#define PIN            2
+#define PIN            6
 
 // Number of leds
 #define LED_COUNT      30
@@ -33,8 +33,8 @@ void loop()
 				for(int nCpt = 0;nCpt < LED_COUNT;++nCpt)
 				{
 					pixels.setPixelColor(nCpt, pixels.Color(dR, dG, dB));
-					pixels.show();
 				}
+				pixels.show();
 			}
 			break;
 			default:
