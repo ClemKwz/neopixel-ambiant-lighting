@@ -12,6 +12,8 @@ namespace Ui
     class AMBIANT_LIGHTING;
 }
 
+#define LEDS_COUNT              30
+
 class AMBIANT_LIGHTING : public QMainWindow
 {
     Q_OBJECT
@@ -25,12 +27,17 @@ private slots:
 
 protected:
     void                        OpenSerialPort();
+    void                        CleanLeds();
+    void                        UpdateLed(int nID, int nR, int nG, int nB);
+    void                        ProcessAverage();
+    void                        SendValues();
 
 private:
     Ui::AMBIANT_LIGHTING*       _pUi;
     QGraphicsScene*             _pGraphicsScene;
     QSerialPort*                _pSerial;
     QList<QSerialPortInfo>      _PortInfoList;
+    int                         _pLeds[LEDS_COUNT][4];
 };
 
 #endif // AMBIANTLIGHTING_H
