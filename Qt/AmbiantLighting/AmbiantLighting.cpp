@@ -246,11 +246,11 @@ void AMBIANT_LIGHTING::ProcessTopSide(int nX, int nR, int nG, int nB)
     int nRelatedLedID = -1;
     if(nX < nTopLedWidth)
     {
-       nRelatedLedID = 8;
+       nRelatedLedID = 7;
     }
     else if(nX >= nTopLedWidth && nX < nTopLedWidth*2)
     {
-        nRelatedLedID = 9;
+        nRelatedLedID = 8;
     }
     else if(nX >= nTopLedWidth*2 && nX < nTopLedWidth*3)
     {
