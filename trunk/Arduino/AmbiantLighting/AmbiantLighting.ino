@@ -1,12 +1,13 @@
 #include <Adafruit_NeoPixel.h>
 
 // Connected pin
-#define PIN            6
+#define STRIP_PIN		6
+#define	BRIGHTNESS_PIN	A0
 
 // Number of leds
 #define LEDS_COUNT      30
 
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(LEDS_COUNT, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(LEDS_COUNT, STRIP_PIN, NEO_GRB + NEO_KHZ800);
 
 //-----------------------------------------------------------
 void setup()
@@ -51,4 +52,9 @@ void loop()
 			break;
 		}
 	}
+	
+	int nSensorValue = analogRead(A0);
+	// Convert the analog reading (0 - 1023) to a brightness value (0 - 255)
+	int nBrightness = nSensorValue * (255.0 / 1023.0);
+	pixels.setBrightness(nBrightness);
 }
