@@ -1,0 +1,1 @@
+This is an ambiant lighting project using a Qt software part and an Arduino/NeoPixel lighting hardware.
